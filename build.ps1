@@ -1,10 +1,3 @@
-[CmdletBinding()]
-Param(
-    [string]$Script = "build.cake",
-    [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
-    [string[]]$ScriptArgs
-)
-
 $CakeVersion = "0.25.0";
 $NuGetVersion = "latest";
 
@@ -24,15 +17,6 @@ if (!(Test-Path $CakeUp)) {
     }
 }
 
-# Build the argument list.
-$Arguments = @{
-    script=$Script;
-    cake=$CakeVersion;
-    nuget=$NuGetVersion;
-    bootstrap="true";
-    execute="true";
-}.GetEnumerator() | ForEach-Object{"`"--{0}={1}`"" -f $_.key, $_.value };
-
 # Execute Cakeup
-Invoke-Expression "& `"$CakeUp`" $Arguments -- $ScriptArgs"
+Invoke-Expression "& `"$CakeUp`" --cake=$CakeVersion --nuget=$NuGetVersion --bootstrap --execute -- $args"
 exit $LASTEXITCODE;
