@@ -1,9 +1,14 @@
 [CmdletBinding()]
 Param(
+    [string]$Script = "build.cake",
     [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
     [string[]]$ScriptArgs
 )
 
+$CakeVersion = "0.25.0";
+$NuGetVersion = "latest";
+
+# Fix up the script root.
 if(!$PSScriptRoot){
     $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 }
@@ -21,9 +26,9 @@ if (!(Test-Path $CakeUp)) {
 
 # Build the argument list.
 $Arguments = @{
-    script="build.cake";
-    cake="0.25.0";
-    nuget="latest";
+    script=$Script;
+    cake=$CakeVersion;
+    nuget=$NuGetVersion;
     bootstrap="true";
     execute="true";
 }.GetEnumerator() | ForEach-Object{"`"--{0}={1}`"" -f $_.key, $_.value };
