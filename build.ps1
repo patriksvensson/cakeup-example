@@ -1,5 +1,9 @@
+$Script = "build.cake";
 $CakeVersion = "0.25.0";
 $NuGetVersion = "latest";
+$DotnetVersion = "none";
+$UseCoreClr = $false;
+$Bootstrap = $true;
 
 # Fix up the script root.
 if(!$PSScriptRoot){
@@ -12,11 +16,15 @@ if (!(Test-Path $CakeUp)) {
     Write-Verbose -Message "Downloading cakeup.exe..."
     try {        
         $wc = (New-Object System.Net.WebClient);
-        $wc.DownloadFile("https://github.com/patriksvensson/example/releases/download/v0.1.0/cakeup.exe", $CakeUp) } catch {
+        $wc.DownloadFile("https://github.com/patriksvensson/example/releases/download/v0.3.0/cakeup.exe", $CakeUp) } catch {
             Throw "Could not download cakeup.exe."
     }
 }
 
 # Execute Cakeup
-Invoke-Expression "& `"$CakeUp`" --cake=$CakeVersion --nuget=$NuGetVersion --bootstrap --execute -- $args"
+&$CakeUp "--script=$Script" "--cake=$CakeVersion" "--nuget=$NuGetVersion" `
+         "--coreclr=$UseCoreClr" "--sdk=$DotnetVersion" `
+         "--bootstrap=$Bootstrap" "--execute" "--" "$args"
+
+# Return the exit code from Cakeup.
 exit $LASTEXITCODE;
