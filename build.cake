@@ -1,5 +1,4 @@
 #tool nuget:?package=NUnit.ConsoleRunner&version=3.4.0
-#module nuget:?package=Cake.LongPath.Module
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -36,18 +35,9 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    if(IsRunningOnWindows())
-    {
-      // Use MSBuild
-      MSBuild("./src/Example.sln", settings =>
-        settings.SetConfiguration(configuration));
-    }
-    else
-    {
-      // Use XBuild
-      XBuild("./src/Example.sln", settings =>
-        settings.SetConfiguration(configuration));
-    }
+    // Use MSBuild
+    MSBuild("./src/Example.sln", settings =>
+    settings.SetConfiguration(configuration));
 });
 
 Task("Run-Unit-Tests")

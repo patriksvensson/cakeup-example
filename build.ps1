@@ -1,7 +1,7 @@
 $CakeVersion = "0.25.0";
 $NuGetVersion = "latest";
 $DotnetVersion = "none";
-$UseCoreClr = $false;
+$CoreClr = $false;
 $Bootstrap = $true;
 
 # Fix up the script root.
@@ -22,7 +22,7 @@ if (!(Test-Path $CakeUp)) {
 
 # Execute Cakeup
 &$CakeUp "--cake=$CakeVersion" "--nuget=$NuGetVersion" `
-         "--coreclr=$UseCoreClr" "--sdk=$DotnetVersion" `
+         "--sdk=$DotnetVersion" "--coreclr=$CoreClr" `
          "--bootstrap=$Bootstrap" "--execute" "--" "$args"
 
 # Return the exit code from Cakeup.
