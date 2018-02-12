@@ -20,6 +20,6 @@ if [ ! -f "$cakeup" ]; then
 fi
 
 # Start Cake
-exec $cakeup --cake="0.25.0" --nuget="latest" \
-             --sdk="none" --coreclr="$coreclr" \
+exec $cakeup --cake="$cake_version" --nuget="$nuget_version" \
+             --sdk="$dotnet_version" --coreclr="$coreclr" \
              --bootstrap="$bootstrap" --execute -- $@
