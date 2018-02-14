@@ -10,18 +10,19 @@ if(!$PSScriptRoot){
 }
 
 # Make sure that cakeup is present.
-$CakeUp = Join-Path $PSScriptRoot "cakeup.exe"
-if (!(Test-Path $CakeUp)) {
-    Write-Verbose -Message "Downloading cakeup.exe..."
+$CakeupVersion = "0.2.19"
+$Cakeup = Join-Path $PSScriptRoot "cakeup-x86_64-v$CakeupVersion.exe"
+if (!(Test-Path $Cakeup)) {
+    Write-Verbose -Message "Downloading cakeup.exe ($CakeupVersion)..."
     try {        
         $wc = (New-Object System.Net.WebClient);
-        $wc.DownloadFile("https://github.com/patriksvensson/example/releases/download/v0.4.0/cakeup.exe", $CakeUp) } catch {
+        $wc.DownloadFile("https://cakeup.blob.core.windows.net/windows/cakeup-x86_64-v$CakeupVersion.exe", $Cakeup) } catch {
             Throw "Could not download cakeup.exe."
     }
 }
 
 # Execute Cakeup
-&$CakeUp "--cake=$CakeVersion" "--nuget=$NuGetVersion" `
+&$Cakeup "--cake=$CakeVersion" "--nuget=$NuGetVersion" `
          "--sdk=$DotnetVersion" "--coreclr=$CoreClr" `
          "--bootstrap=$Bootstrap" "--execute" "--" "$args"
 
