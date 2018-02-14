@@ -1,4 +1,4 @@
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.4.0
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.8.0
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -44,9 +44,11 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    NUnit3("./src/**/bin/" + configuration + "/*.Tests.dll", new NUnit3Settings {
-        NoResults = true
-        });
+    DotNetCoreTest("./src/Example.Tests/Example.Tests.csproj");
+
+    // NUnit3("./src/**/bin/" + configuration + "/**/*.Tests.dll", new NUnit3Settings {
+    //     NoResults = true
+    //     });
 });
 
 //////////////////////////////////////////////////////////////////////
