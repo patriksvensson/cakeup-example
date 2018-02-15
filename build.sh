@@ -2,7 +2,7 @@
 cake_version="0.25.0"
 nuget_version="latest"
 dotnet_version="1.1.7"
-coreclr=false
+coreclr=true
 bootstrap=true
 
 # Fix up the script root.
@@ -16,7 +16,7 @@ case "${uname_out}" in
 esac
 
 # Make sure that cakeup exist.
-cakeup_version="0.2.19"
+cakeup_version="0.2.25"
 cakeup="$script_dir/cakeup-x86_64-v$cakeup_version"
 if [ ! -f "$cakeup" ]; then
     echo "Downloading cakeup..."

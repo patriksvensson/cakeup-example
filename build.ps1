@@ -1,7 +1,7 @@
 $CakeVersion = "0.25.0";
 $NuGetVersion = "latest";
-$DotnetVersion = "none";
-$CoreClr = $false;
+$DotnetVersion = "1.1.7";
+$CoreClr = $true;
 $Bootstrap = $true;
 
 # Fix up the script root.
@@ -10,7 +10,7 @@ if(!$PSScriptRoot){
 }
 
 # Make sure that cakeup is present.
-$CakeupVersion = "0.2.19"
+$CakeupVersion = "0.2.25"
 $Cakeup = Join-Path $PSScriptRoot "cakeup-x86_64-v$CakeupVersion.exe"
 if (!(Test-Path $Cakeup)) {
     Write-Verbose -Message "Downloading cakeup.exe ($CakeupVersion)..."
