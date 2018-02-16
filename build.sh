@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-cake_version="0.25.0"
-nuget_version="latest"
-dotnet_version="1.1.7"
-coreclr=true
-bootstrap=true
-
-# Fix up the script root.
 script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Get the platform that we're running on.
@@ -16,11 +9,10 @@ case "${uname_out}" in
 esac
 
 # Make sure that cakeup exist.
-cakeup_version="0.2.25"
-cakeup="$script_dir/cakeup-x86_64-v$cakeup_version"
+cakeup="$script_dir/cakeup-x86_64-latest"
 if [ ! -f "$cakeup" ]; then
     echo "Downloading cakeup..."
-    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v$cakeup_version"
+    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-latest"
     if [ $? -ne 0 ]; then
         echo "An error occured while downloading cakeup."
         exit 1
@@ -28,6 +20,6 @@ if [ ! -f "$cakeup" ]; then
 fi
 
 # Start Cake
-exec $cakeup --cake="$cake_version" --nuget="$nuget_version" \
-             --sdk="$dotnet_version" --coreclr="$coreclr" \
-             --bootstrap="$bootstrap" --execute -- $@
+exec $cakeup --cake="0.25.0" --nuget="latest" \
+             --sdk="1.1.7" --coreclr \
+             --bootstrap --execute -- $@
