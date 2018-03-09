@@ -17,9 +17,10 @@ if [ ! -f "$cakeup" ]; then
         echo "An error occured while downloading cakeup."
         exit 1
     fi
+    chmod +x $cakeup
 fi
 
 # Start Cake
-exec $cakeup --cake="0.25.0" --nuget="latest" \
-             --sdk="1.1.7" --coreclr \
+exec $cakeup --cake="0.26.1" --nuget="latest" \
+             --sdk="2.1.4" --coreclr \
              --bootstrap --execute -- $@
