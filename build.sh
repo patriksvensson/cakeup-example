@@ -12,14 +12,15 @@ esac
 cakeup="$script_dir/cakeup-x86_64-latest"
 if [ ! -f "$cakeup" ]; then
     echo "Downloading cakeup..."
-    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-latest"
+    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v0.2.67"
     if [ $? -ne 0 ]; then
         echo "An error occured while downloading cakeup."
         exit 1
     fi
+    chmod +x "$cakeup"
 fi
 
 # Start Cake
-exec $cakeup --cake="0.25.0" --nuget="latest" \
-             --sdk="1.1.7" --coreclr \
-             --bootstrap --execute -- $@
+exec $cakeup run --cake="0.26.1" --nuget="latest" \
+                 --sdk="2.1.4" --coreclr \
+                 --bootstrap --execute -- $@
