@@ -3,7 +3,7 @@ if(!$PSScriptRoot){
 }
 
 # Make sure that cakeup is present.
-$Cakeup = Join-Path $PSScriptRoot "cakeup-x86_64-latest.exe"
+$Cakeup = Join-Path $PSScriptRoot "tools/cakeup.exe"
 if (!(Test-Path $Cakeup)) {
     Write-Verbose -Message "Downloading cakeup.exe ($CakeupVersion)..."
     try {        
@@ -14,9 +14,9 @@ if (!(Test-Path $Cakeup)) {
 }
 
 # Execute Cakeup
-&$Cakeup "--cake=0.25.0" "--nuget=latest" `
-         "--sdk=1.1.7" "--coreclr" `
-         "--bootstrap" "--execute" "--" "$args"
+&$Cakeup "run" "--cake=0.27.1" "--nuget=latest" `
+         "--sdk=2.1.4" "--coreclr" `
+         "--execute" "--" "$args"
 
 # Return the exit code from Cakeup.
 exit $LASTEXITCODE;

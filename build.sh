@@ -2,17 +2,21 @@
 script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Get the platform that we're running on.
-uname_out="$(uname -s)"
-case "${uname_out}" in
-    Darwin*)    platform=osx;;
-    *)          platform=linux
-esac
+if [ -f /.dockerenv ]; then
+    platform="linux-musl"
+else
+    uname_out="$(uname -s)"
+    case "${uname_out}" in
+        Darwin*)    platform=osx;;
+        *)          platform=linux
+    esac
+fi
 
 # Make sure that cakeup exist.
 cakeup="$script_dir/cakeup-x86_64-latest"
 if [ ! -f "$cakeup" ]; then
     echo "Downloading cakeup..."
-    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v0.2.67"
+    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v0.2.74"
     if [ $? -ne 0 ]; then
         echo "An error occured while downloading cakeup."
         exit 1
