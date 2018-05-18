@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+tools_dir=$script_dir/tools
 
 # Get the platform that we're running on.
 if [ -f /.dockerenv ]; then
@@ -13,10 +14,10 @@ else
 fi
 
 # Make sure that cakeup exist.
-cakeup="$script_dir/cakeup-x86_64-latest"
+cakeup="$tools_dir/cakeup-x86_64-v0.2.82"
 if [ ! -f "$cakeup" ]; then
     echo "Downloading cakeup..."
-    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v0.2.74"
+    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v0.2.82"
     if [ $? -ne 0 ]; then
         echo "An error occured while downloading cakeup."
         exit 1
