@@ -14,10 +14,10 @@ else
 fi
 
 # Make sure that cakeup exist.
-cakeup="$tools_dir/cakeup-x86_64-v0.2.82"
+cakeup="$tools_dir/cakeup-x86_64-latest"
 if [ ! -f "$cakeup" ]; then
     echo "Downloading cakeup..."
-    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-v0.2.82"
+    curl -Lsfo $cakeup "https://cakeup.blob.core.windows.net/$platform/cakeup-x86_64-latest"
     if [ $? -ne 0 ]; then
         echo "An error occured while downloading cakeup."
         exit 1
