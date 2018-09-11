@@ -1,5 +1,10 @@
-version: 1.0.{build}
-image: Visual Studio 2015
+# Initialization
+init:
+  - git config --global core.autocrlf true
+
+# Build script
 build_script:
-- cmd: PowerShell -Version 2.0 .\build.ps1 --verbosity=diagnostic
+  - ps: .\build.ps1 --verbosity=verbose
+
+# Tests
 test: off
